@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "kalium",
+  "version": "${version}",
+  "name": "Kalium",
+  "description": "激进渲染优化模组 - 优先玩家，缓存UI，超时熔断",
+  "authors": ["CookieX-a"],
+  "contact": {
+    "homepage": "https://github.com/CookieX-a/Kalium-Mod",
+    "sources": "https://github.com/CookieX-a/Kalium-Mod"
+  },
+  "license": "MIT",
+  "icon": "assets/kalium/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": ["org.kalium.Kalium"],
+    "client": ["org.kalium.Kalium"]
+  },
+  "mixins": ["kalium.mixins.json"],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=${java_version}",
+    "fabric-api": ">=${fabric_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+      
+      }
+    }
+  }
+}
