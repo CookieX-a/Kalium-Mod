@@ -22,7 +22,7 @@ public class ChatHelper {
                 .append(Component.literal(" (" + desc + ")，已停止渲染本帧页面")
                         .withStyle(ChatFormatting.WHITE));
 
-        Minecraft.getInstance().player.sendMessage(msg, Minecraft.getInstance().player.getUUID());
+        Minecraft.getInstance().player.sendSystemMessage(msg);
         messageSentThisDrop = true;
     }
 
