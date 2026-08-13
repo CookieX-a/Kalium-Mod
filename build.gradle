@@ -12,16 +12,19 @@ base {
 
 repositories {
     mavenCentral()
-    maven { url = 'https://repo.graalvm.org/maven2/' }
 }
 
 dependencies {
+    // Minecraft 核心
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    include 'org.graalvm.js:js:23.1.0'
-    include 'org.graalvm.js:js-scriptengine:23.1.0'
+
+    // GraalVM JavaScript 引擎（使用 Polyglot API）
+    include 'org.graalvm.polyglot:polyglot:23.1.0'           // 核心 API
+    include 'org.graalvm.polyglot:js:23.1.0'                 // JavaScript 语言实现（pom 类型）
+    include 'org.graalvm.js:js-scriptengine:23.1.0'          // JSR-223 ScriptEngine 支持
 }
 
 processResources {
