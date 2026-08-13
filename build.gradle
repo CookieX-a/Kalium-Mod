@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.17-SNAPSHOT'
+    id 'fabric-loom' version '1.17-SNAPSHOT'   // 适配 Minecraft 1.21.11
     id 'maven-publish'
 }
 
@@ -19,6 +19,7 @@ dependencies {
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    // GraalVM JavaScript 引擎（JS API 支持）
     include 'org.graalvm.js:js:23.1.0'
     include 'org.graalvm.js:js-scriptengine:23.1.0'
 }
@@ -52,11 +53,11 @@ java {
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
+        rename { "${it}_${base.archivesName}" }
     }
     manifest {
         attributes(
-            'Implementation-Title': project.archives_base_name,
+            'Implementation-Title': base.archivesName,
             'Implementation-Version': project.version,
             'Implementation-Vendor': 'Kalium Contributors'
         )
@@ -66,7 +67,7 @@ jar {
 publishing {
     publications {
         create("mavenJava", MavenPublication) {
-            artifactId = project.archives_base_name
+            artifactId = base.archivesName
             from components.java
         }
     }
