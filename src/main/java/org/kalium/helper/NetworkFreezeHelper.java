@@ -26,11 +26,12 @@ public class NetworkFreezeHelper {
     public static boolean shouldBlockPacket(Packet<?> packet) {
         if (!isFrozen()) return false;
 
-        if (packet instanceof ServerboundKeepAlivePacket ||
-            packet instanceof ServerboundPongPacket) {
+        // 保留心跳包，防止被踢
+        if (packet instanceof ServerboundKeepAlivePacket) {
             return false;
         }
 
+        // 拦截所有移动、交互、使用物品等行为包
         if (packet instanceof ServerboundMovePlayerPacket ||
             packet instanceof ServerboundUseItemPacket ||
             packet instanceof ServerboundInteractPacket ||

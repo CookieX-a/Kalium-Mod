@@ -1,7 +1,8 @@
 package org.kalium;
 
-import helper.ChatHelper;
-import helper.NetworkFreezeHelper;
+import org.kalium.helper.ChatHelper;
+import org.kalium.helper.NetworkFreezeHelper;
+import org.kalium.api.ErrorCodes;
 
 public class FrameDropGuard {
     private static long frameStartTime = 0;
@@ -21,13 +22,13 @@ public class FrameDropGuard {
             if (!lastFrameDropped) {
                 lastFrameDropped = true;
                 NetworkFreezeHelper.freeze();
-                ChatHelper.sendErrorMessage(api.ErrorCodes.UPDATE_FAILED);
+                ChatHelper.sendErrorMessage(ErrorCodes.UPDATE_FAILED);
                 Kalium.LOGGER.warn("渲染超时 {}ms，已丢弃本帧，冻结网络 (第{}次)", elapsed, dropCount);
             }
 
             if (dropCount >= MAX_DROPS) {
                 Kalium.LOGGER.error("连续丢帧 {} 次，触发强制恢复！", MAX_DROPS);
-                ChatHelper.sendErrorMessage(api.ErrorCodes.FRAME_DROP_RECOVERY_TIMEOUT);
+                ChatHelper.sendErrorMessage(ErrorCodes.FRAME_DROP_RECOVERY_TIMEOUT);
                 NetworkFreezeHelper.unfreeze();
                 dropCount = 0;
                 lastFrameDropped = false;
@@ -58,4 +59,4 @@ public class FrameDropGuard {
     public static int getDropCount() {
         return dropCount;
     }
-}
+};
