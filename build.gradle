@@ -56,7 +56,6 @@ java {
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${base.archivesName}" }
     }
     manifest {
         attributes(
