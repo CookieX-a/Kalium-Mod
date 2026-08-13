@@ -1,6 +1,7 @@
 package org.kalium.helper;
 
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.common.ServerboundKeepAlivePacket;  // ← 修正导入
 import net.minecraft.network.protocol.game.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -27,7 +28,7 @@ public class NetworkFreezeHelper {
         if (!isFrozen()) return false;
 
         // 保留心跳包，防止被踢
-        if (packet instanceof ServerboundKeepAlivePacket) {
+        if (packet instanceof ServerboundKeepAlivePacket) {  // ← 现在能正确识别了
             return false;
         }
 
